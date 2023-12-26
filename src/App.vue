@@ -1,19 +1,37 @@
 <template>
-   <button @click="handler('hi', $event)">
-        Click 1
-   </button>
-   <button @click="handler('what', $event)">
-        Click 2
-   </button>
+    <div
+        class="parent"
+        @click.self="handlerA">
+        <div
+            class="child"></div>
+    </div>
 </template>
 
 <script>
 export default {
     methods: {
-        handler(msg, event) {
-            console.log(msg)
-            console.log(event)
+        handlerA() {
+            console.log('A')
+        },
+        handlerB(event) {
+            event.stopPropagation()
+            console.log('B')
         }
     }
 }
 </Script>
+
+<style scoped lang="scss">
+    .parent {
+        width: 200px;
+        height: 100px;
+        background-color: royalblue;
+        margin: 10px;
+        padding: 10px;
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+    }
+</style>
